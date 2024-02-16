@@ -1,0 +1,33 @@
+version: "3.5"
+services:
+  app:
+    image: binwiederhier/ntfy
+    command:
+      - serve
+    restart: unless-stopped
+    environment:
+      - TZ=Europe/Berlin
+      - NTFY_BASE_URL
+      - NTFY_CACHE_FILE=/var/cache/ntfy/cache.db
+      - NTFY_CACHE_DURATION
+      - NTFY_AUTH_FILE=/var/lib/ntfy/user.db
+      - NTFY_AUTH_DEFAULT_ACCESS=deny-all
+      - NTFY_BEHIND_PROXY=true
+      - NTFY_ENABLE_LOGIN=true
+    volumes:
+      - app_cache:/var/cache/ntfy
+      - app_users:/var/lib/ntfy
+    networks:
+      proxy_apps:
+      default:
+    labels:
+      backups: "true"
+
+volumes:
+  app_cache:
+  app_users:
+
+networks:
+  proxy_apps:
+    name: proxy_apps
+    external: true

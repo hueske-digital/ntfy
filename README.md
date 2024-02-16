@@ -1,0 +1,2 @@
+- Port: 80
+- Admin anlegen: `ntfy user add --role=admin insert-your-username`
