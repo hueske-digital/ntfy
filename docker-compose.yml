@@ -20,8 +20,6 @@ services:
     networks:
       proxy_apps:
       default:
-    labels:
-      backups: "true"
 
 volumes:
   app_cache:
